@@ -1,0 +1,43 @@
+=> Intall nodemon
+
+
+=> Install Express
+
+    npm init -y
+
+    npm i express --save
+
+
+---------------------------------------------------------
+
+   Middleware
+
+   npm i morgan
+---------------------------------------------------------
+=> CORS
+    npm i cors
+---------------------------------------------------------
+=>body-parser
+
+    npm i body-parser
+---------------------------------------------------------
+=> helmet click-jacking, MINE Sniffing , Referrer leaks
+
+    (i) install
+
+    https://www.npmjs.com/package/helmet
+
+    npm i helmet
+
+
+---------------------------------------------------------
+=> ejs
+
+    (i) install
+
+    https://ejs.co/
+
+    npm install ejs
+
+
+---------------------------------------------------------

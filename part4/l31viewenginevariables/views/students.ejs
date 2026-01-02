@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EJS Exercise</title>
+</head>
+<body>
+
+<h1>Students page</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Score</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% students.forEach((student)=>{ %>
+        <tr>
+            <td><%= student.id %></td>
+            <td><%= student.name %></td>
+            <td><%= student.age %></td>
+            <td><%= student.score %></td>
+            <td>
+                <% if(student.score >= 40){ %>
+                    <span style="color: lightgreen;" >Pass</span>
+                <% }else{ %>
+                    <span style="color: red;" >Fail</span>
+                <% } %>
+
+
+            </td>
+        </tr>
+    <% }) %>
+
+
+    </tbody>
+</table>
+
+</body>
+</html>
+

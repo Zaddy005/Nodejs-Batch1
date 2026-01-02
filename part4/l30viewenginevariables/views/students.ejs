@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EJS Exercise</title>
+</head>
+<body>
+
+<h1>Students page</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% students.forEach((student)=>{ %>
+            <tr>
+                <td><%= student.id %></td>
+                <td><%= student.name %></td>
+                <td><%= student.age %></td>
+                <td><%= student.score %></td>
+            </tr>
+        <% }) %>
+
+
+    </tbody>
+</table>
+
+</body>
+</html>
+

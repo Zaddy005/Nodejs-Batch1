@@ -1,0 +1,8 @@
+=> Intall nodemon
+
+
+=> Install Express
+
+    npm init -y
+
+    npm i express --save

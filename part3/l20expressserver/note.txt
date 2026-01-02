@@ -1,0 +1,20 @@
+=> Intall nodemon global
+
+    https://www.npmjs.com/package/nodemon
+
+    npm install -g nodemon
+
+    nodemon -v
+
+----------------------------------------
+=> Express
+
+    npm init -y
+
+    (i) Install Express
+
+    https://expressjs.com/
+
+    npm install express --save
+
+----------------------------------------
