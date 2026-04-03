@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<%- include('./layout/head.ejs')  %>
+<body>
+    <h1>Welcome to EJS Lesson</h1>
+
+    <%- include('./layout/nav.ejs') %>
+
+
+    <div class="content" >
+        <h2>ALl  Posts</h2>
+        <% if(posts.length > 0){ %>
+                <% posts.forEach((post)=>{ %>
+                    <div style="display: flex; justify-content: space-between; align-items: center;" >
+                        <h3> <%= post.title %> </h3>
+                        <small> <%= post.createdAt ? new Date(post.createdAt).toLocaleString() : "unknow Date" %></small>
+                    </div>
+                    <small> <%= post.subtitle %> </small>
+                    <p> <%= post.body %> </p>
+                    <hr/>
+                <% }) %>
+
+            <% }else{ %>
+                <p> There are no blog posts to display</p>
+                <a href="/posts/create" >Create First Post</a>
+            <% } %>
+
+    </div>
+
+    <%- include('./layout/footer.ejs') %>
+
+</body>
+</html>

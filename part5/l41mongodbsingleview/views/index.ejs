@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<%- include('./layout/head.ejs')  %>
+<body>
+    <h1>Welcome to EJS Lesson</h1>
+
+    <%- include('./layout/nav.ejs') %>
+
+
+    <div class="content" >
+        <h2>ALl  Posts</h2>
+        <% if(posts.length > 0){ %>
+                <% posts.forEach((post)=>{ %>
+
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;" >
+                        <a href="/post/<%=post['_id']%>" class="" >
+                            <h3> <%= post.title %> </h3>
+                        </a>
+                        <small> <%= post.createdAt ? new Date(post.createdAt).toLocaleString() : "unknow Date" %></small>
+                    </div>
+                    <small> <%= post.subtitle %> </small>
+                    <p> <%= post.body %> </p>
+                    <div style="display: flex;align-items: center;" >
+                        <a href="/posts/<%= post["_id"] %>/edit " class="btn" >Edit</a>
+                        <form class="padding:0;margin:0;" action="/post/<%= post["_id"] %>/delete" method="POST">
+                            <button type="submit" class="btn" style="background: red;border: none;"
+                                    onclick="window.alert('are you sure you want to delete this post')"
+                            >Delete</button>
+                        </form>
+
+                    </div>
+
+                    <hr/>
+                <% }) %>
+
+            <% }else{ %>
+                <p> There are no blog posts to display</p>
+                <a href="/posts/create" >Create First Post</a>
+            <% } %>
+
+    </div>
+
+    <%- include('./layout/footer.ejs') %>
+
+</body>
+</html>

@@ -17,24 +17,46 @@ const __dirname = path.dirname(__filename);
 // middleware and static files
 app.use(morgan("dev"));
 app.use(express.static("public"));  // http://localhost:3000/style.css
+app.use(express.urlencoded({extended:true})); // ***** HTML from submit for post/put
 app.use(express.json());// for JOSN requests
 
 // mongoDB Atlas URI
 const cluster = "cluster0";
 const dbName = "nodejsbatch2";
 const dbUser = "zaddy";
-const dbPassword = "aZ4diuB4wDDRrmKz";
+const dbPassword = "dZPLu8yZwGpULzB4";
+// const dbURL = `mongodb+srv://${dbUser}:${dbPassword}@${cluster}.lzogzuk.mongodb.net/?appName=Cluster0`;
+
 const dbURL = `mongodb+srv://${dbUser}:${dbPassword}@${cluster}.lzogzuk.mongodb.net/?appName=Cluster0`;
+
 
 mongoose.connect(dbURL)
     .then(()=>{
         console.log("connected to mongodb");
-
-        app.listen(port,()=>{
-           console.log(`Server listening on http://localhost:${port}`);
-        });
     })
-    .catch(err=>console.log(err));
+    .catch(err=>{
+        process.exit(1);
+        console.log(err)
+    });
+
+// Database Middleware
+app.use((req,res,next)=>{
+    // console.log("ReadyStage = ",mongoose.connection);
+    // console.log("ReadyStage = ",mongoose.connection["_readyState"]);
+    if(mongoose.connection.readyState !== 1){
+        return res.status(503).send("Database not connected. Please try again later.");
+    }
+    next()
+});
+
+
+// Shutdown ( SIGINT = Signal Interupt , raised when you press Ctrl + c )
+process.on("SIGINT",async ()=>{
+    console.log("SIGINT");
+    console.log("MongoDB connection closed");
+    await mongoose.connection.close();
+    process.exit(0);
+});
 
 // GET route
 app.get("/",(req,res)=>{
@@ -63,10 +85,15 @@ app.get("/posts/create",(req,res)=>{
    res.render("create",{title:"Create Page"});
 });
 
+app.post("/createuser",(req,res)=>{
+    console.log(req.body);
+});
+
 // 404 ( note : that must be bottom line )
 app.use((req,res,next)=>{
     res.status(404).render("404",{title:"404"});
 });
+
 
 app.listen(port, () => {
     console.log("Server running on http://localhost:" + port);
@@ -74,6 +101,36 @@ app.listen(port, () => {
 
 // <%=  %> = output value
 // <%   %> = no output ( Logic Only )
-// l33 to l35 16:41
+
+// middleware for html form
+// app.use(express.urlencoded({extended:true}));
+// html -> form (default = URL encorded format )
+// eg form = name=su%su&age=20&city="Yangon"
+
+// if u not use middleware express.urlencoded
+// app.post("/createuser",(req,res)=>{
+//     console.log(req.body); // undefined
+// });
+
+// if u use middleware express.urlencoded
+// app.post("/createuser",(req,res)=>{
+//     console.log(req.body); // obj
+// });
+
+
+// => extended:true
+    // nested objects or arrays support
+
+    // after parse
+    // {
+    //     user:{
+    //         name:"su su",
+    //         age:20
+    //     }
+    //     hobbiess:['reading','coding']
+    // }
+
+// => extended:false
+    // no nested objects
 
 // 29RD

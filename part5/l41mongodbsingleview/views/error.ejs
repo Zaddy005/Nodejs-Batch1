@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./layout/head.ejs') %>
+<body>
+    <%- include('./layout/nav.ejs') %>
+
+<div class="content" >
+    <h1><%= title %></h1>
+    <div style="background: #f4f4f4;color: red;padding:20px; border-radius: 5px; margin:20px 0;" >
+        <p><strong> <%= error %> </strong></p>
+        <a href="/" >Back to home</a>
+    </div>
+</div>
+
+    <%- include('./layout/footer.ejs') %>
+
+</body>
+</html>

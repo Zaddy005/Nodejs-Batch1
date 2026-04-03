@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<%- include('./layout/head.ejs') %>
+<body>
+<h1>Welcome to EJS Lesson</h1>
+
+
+<%- include('./layout/nav.ejs') %>
+
+<div>
+    <div>
+        <h1>Create New Post</h1>
+        <% if(error !== null ){ %>
+            <div class="alert alert-danger" ><%= error %></div>
+        <% } %>
+    </div>
+</div>
+
+<div class="content" >
+    <form action="/posts/create" method="POST" >
+        <div>
+            <label for="title" >Post Title</label>
+            <input type="text" name="title" id="title" value="<%= FormData ? FormData.title : "" %>" />
+        </div>
+        <div>
+            <label for="subtitle">Post Sub Title</label>
+            <input type="text" name="subtitle" id="subtitle" value="<%= FormData ? FormData.subtitle : "" %>" />
+        </div>
+        <div>
+            <label for="boyd"> Body </label>
+            <textarea name="body" id="body">
+                <%= FormData ? FormData.body : "" %>
+            </textarea>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<%- include('./layout/footer.ejs') %>
+
+</body>
+</html>
